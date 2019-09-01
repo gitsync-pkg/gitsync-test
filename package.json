@@ -1,0 +1,27 @@
+{
+  "name": "@gitsync/test",
+  "version": "0.1.0",
+  "description": "Test utils for Gitsync",
+  "keywords": [
+    "gitsync",
+    "test"
+  ],
+  "author": "twinh <twinhuang@qq.com>",
+  "homepage": "https://github.com/twinh/gitsync#readme",
+  "license": "MIT",
+  "main": "index.ts",
+  "files": [
+    "index.ts",
+    "Repo.ts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twinh/gitsync.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "@gitsync/sync": "^0.1.0"
+  }
+}
