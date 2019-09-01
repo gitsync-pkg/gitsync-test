@@ -6,7 +6,6 @@ import * as log from 'npmlog';
 import chalk from "chalk";
 import Repo from "./Repo";
 import {Git} from "ts-git";
-import Sync from "@gitsync/sync";
 import {CommandModule} from "yargs";
 
 const baseDir = path.resolve('data');
@@ -50,17 +49,6 @@ export function removeRepos() {
     }
   });
 }
-
-export const sync = async (source: Repo, options: any, instance: Sync = null) => {
-  changeDir(source);
-  const sync = instance || new Sync();
-  await sync.sync(Object.assign({
-    // TODO
-    $0: '',
-    _: [],
-  }, options));
-  resetDir();
-};
 
 export async function runCommand(command: CommandModule, source: Repo, options: any) {
   changeDir(source);
