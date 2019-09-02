@@ -50,7 +50,7 @@ export function removeRepos() {
   });
 }
 
-export async function runCommand(command: CommandModule, source: Repo, options: any) {
+export async function runCommand(command: CommandModule, source: Repo, options: any = {}) {
   changeDir(source);
   await command.handler(Object.assign({
     $0: '',
