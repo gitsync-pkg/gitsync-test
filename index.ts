@@ -43,11 +43,7 @@ export async function createRepo(bare: boolean = false) {
 };
 
 export function removeRepos() {
-  rimraf(baseDir, (err) => {
-    if (err) {
-      throw err;
-    }
-  });
+  return util.promisify(rimraf)(baseDir);
 }
 
 export async function runCommand(command: CommandModule, source: Repo, options: any = {}) {

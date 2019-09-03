@@ -19,7 +19,7 @@ describe('Gitsync test package', () => {
     const repo = await createRepo();
     expect(fs.existsSync(repo.dir)).toBeTruthy();
 
-    removeRepos();
+    await removeRepos();
     expect(fs.existsSync(repo.dir)).toBeFalsy();
   });
 });
