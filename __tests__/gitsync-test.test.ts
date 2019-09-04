@@ -12,7 +12,7 @@ describe('Gitsync test package', () => {
 
     expect(repo1).not.toEqual(repo2);
 
-    removeRepos();
+    await removeRepos();
   });
 
   test('removeRepos', async () => {
