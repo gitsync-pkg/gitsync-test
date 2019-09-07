@@ -5,7 +5,7 @@ import * as rimraf from "rimraf";
 import * as log from 'npmlog';
 import chalk from "chalk";
 import Repo from "./Repo";
-import {Git} from "ts-git";
+import {Git} from "git-cli-wrapper";
 import {CommandModule} from "yargs";
 
 const baseDir = path.resolve('data');

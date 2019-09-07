@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import {createRepo, removeRepos} from '..';
-import {Git} from "ts-git";
+import {Git} from "git-cli-wrapper";
 
 describe('Gitsync test package', () => {
   test('createRepo', async () => {
