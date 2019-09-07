@@ -9,10 +9,9 @@
   "author": "twinh <twinhuang@qq.com>",
   "homepage": "https://github.com/twinh/gitsync#readme",
   "license": "MIT",
-  "main": "index.ts",
+  "main": "dist/index.js",
   "files": [
-    "index.ts",
-    "Repo.ts"
+    "dist"
   ],
   "publishConfig": {
     "access": "public"
@@ -22,7 +21,10 @@
     "url": "git+https://github.com/twinh/gitsync.git"
   },
   "scripts": {
-    "test": "jest"
+    "build": "tsc",
+    "clean": "rimraf dist coverage",
+    "test": "jest",
+    "prepare": "yarn build"
   },
   "dependencies": {
     "@types/jest": "^24.0.18",
