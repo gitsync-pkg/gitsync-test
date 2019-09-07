@@ -1,6 +1,6 @@
 {
   "name": "@gitsync/test",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Test utils for Gitsync",
   "keywords": [
     "gitsync",
