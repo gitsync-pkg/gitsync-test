@@ -1,5 +1,6 @@
 import * as path from "path";
 import * as util from "util";
+import * as fs from 'fs';
 import * as rimraf from "rimraf";
 import * as log from 'npmlog';
 import * as makeDir from "make-dir";
