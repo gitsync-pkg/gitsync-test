@@ -3,7 +3,6 @@ import * as util from "util";
 import * as fs from 'fs';
 import * as rimraf from "rimraf";
 import * as log from 'npmlog';
-import * as makeDir from "make-dir";
 import chalk from "chalk";
 import {CommandModule} from "yargs";
 import {Git} from "git-cli-wrapper";
@@ -29,7 +28,7 @@ export function disableColor() {
 
 export async function createRepo(bare: boolean = false) {
   const repoDir = path.join(baseDir, (nameIndex++).toString());
-  await makeDir(repoDir);
+  await util.promisify(fs.mkdir)(repoDir, {recursive: true});
 
   const repo = new Repo(repoDir);
 
@@ -47,7 +46,7 @@ export function removeRepos() {
   return util.promisify(rimraf)(baseDir);
 }
 
-export async function runCommand(command: CommandModule, source: Git, options: any = {}) {
+export async function runCommand(command: CommandModule, source: Repo, options: any = {}) {
   changeDir(source);
   await command.handler(Object.assign({
     $0: '',
