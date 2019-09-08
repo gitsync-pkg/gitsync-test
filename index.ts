@@ -1,12 +1,12 @@
 import * as path from "path";
 import * as util from "util";
-import * as fs from "fs";
 import * as rimraf from "rimraf";
 import * as log from 'npmlog';
+import * as makeDir from "make-dir";
 import chalk from "chalk";
-import Repo from "./Repo";
-import {Git} from "git-cli-wrapper";
 import {CommandModule} from "yargs";
+import {Git} from "git-cli-wrapper";
+import Repo from "./Repo";
 
 const baseDir = path.resolve('data');
 let nameIndex = 1;
@@ -28,7 +28,7 @@ export function disableColor() {
 
 export async function createRepo(bare: boolean = false) {
   const repoDir = path.join(baseDir, (nameIndex++).toString());
-  await util.promisify(fs.mkdir)(repoDir, {recursive: true});
+  await makeDir(repoDir);
 
   const repo = new Repo(repoDir);
 
@@ -46,7 +46,7 @@ export function removeRepos() {
   return util.promisify(rimraf)(baseDir);
 }
 
-export async function runCommand(command: CommandModule, source: Repo, options: any = {}) {
+export async function runCommand(command: CommandModule, source: Git, options: any = {}) {
   changeDir(source);
   await command.handler(Object.assign({
     $0: '',
