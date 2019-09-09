@@ -6,39 +6,45 @@
     "gitsync",
     "test"
   ],
-  "author": "twinh <twinhuang@qq.com>",
   "homepage": "https://github.com/twinh/gitsync#readme",
-  "license": "MIT",
-  "main": "dist/index.js",
-  "files": [
-    "dist"
-  ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "engines": {
-    "node": ">=10"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/twinh/gitsync.git"
   },
+  "license": "MIT",
+  "author": "twinh <twinhuang@qq.com>",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "clean": "rimraf dist coverage",
-    "test": "jest",
-    "prepare": "yarn build"
+    "prepare": "yarn build",
+    "test": "jest"
   },
   "dependencies": {
+    "@types/node": "^12.7.4",
+    "@types/npmlog": "^4.1.2",
     "@types/rimraf": "^2.0.2",
+    "@types/yargs": "^13.0.2",
+    "chalk": "^2.4.2",
+    "git-cli-wrapper": "^0.1.4",
+    "npmlog": "^4.1.2",
     "rimraf": "^3.0.0",
-    "git-cli-wrapper": "^0.1.4"
+    "yargs": "^14.0.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.18",
-    "jest": "^24.9.0",
     "coveralls": "^3.0.6",
+    "jest": "^24.9.0",
     "ts-jest": "^24.0.2",
     "typescript": "^3.5.3"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
