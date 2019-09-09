@@ -31,7 +31,8 @@
   },
   "dependencies": {
     "@types/rimraf": "^2.0.2",
-    "rimraf": "^3.0.0"
+    "rimraf": "^3.0.0",
+    "git-cli-wrapper": "^0.1.4"
   },
   "devDependencies": {
     "@types/jest": "^24.0.18",
