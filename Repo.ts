@@ -22,7 +22,7 @@ export default class Repo extends Git {
       const now = new Date();
       message = (fs.existsSync(path) ? 'update' : 'add') + ' ' + path + ' ' + (now.getTime() / 1000);
     }
-    return await this.run(['ci', '-am', message])
+    return await this.run(['commit', '-am', message])
   }
 
   getFile(file: string) {
