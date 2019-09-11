@@ -70,3 +70,13 @@ export async function catchError(fn: Function) {
   }
   return error;
 }
+
+export function catchErrorSync(fn: Function) {
+  let error;
+  try {
+    fn();
+  } catch (e) {
+    error = e;
+  }
+  return error;
+}
