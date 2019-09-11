@@ -61,6 +61,11 @@ export function logMessage(): string {
   }, '');
 }
 
+export function clearMessage() {
+  // @ts-ignore
+  log.record = [];
+}
+
 export async function catchError(fn: Function) {
   let error;
   try {
