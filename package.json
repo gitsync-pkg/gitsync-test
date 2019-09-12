@@ -18,7 +18,7 @@
   ],
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "yarn clean && tsc",
     "clean": "rimraf dist coverage",
     "prepare": "yarn build",
     "test": "jest"
