@@ -3,10 +3,10 @@ import * as util from "util";
 import * as fs from 'fs';
 import * as rimraf from "rimraf";
 import * as log from 'npmlog';
-import chalk from "chalk";
 import {CommandModule} from "yargs";
 import {Git} from "git-cli-wrapper";
 import Repo from "./Repo";
+import stripAnsi from 'strip-ansi';
 
 const baseDir = path.resolve('data');
 let nameIndex = 1;
@@ -19,11 +19,6 @@ export function changeDir(repo: Git) {
 
 export function resetDir() {
   process.chdir(cwd);
-}
-
-export function disableColor() {
-  log.disableColor();
-  chalk.enabled = false;
 }
 
 export async function createRepo(bare: boolean = false) {
@@ -56,9 +51,9 @@ export async function runCommand(command: CommandModule, source: Repo, options: 
 }
 
 export function logMessage(): string {
-  return log.record.reduce((message: string, record): string => {
+  return stripAnsi(log.record.reduce((message: string, record): string => {
     return message + "\n" + record.message;
-  }, '');
+  }, ''));
 }
 
 export function clearMessage() {
