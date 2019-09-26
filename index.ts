@@ -43,10 +43,7 @@ export function removeRepos() {
 
 export async function runCommand(command: CommandModule, source: Repo, options: any = {}) {
   changeDir(source);
-  await command.handler(Object.assign({
-    $0: '',
-    _: [],
-  }, options));
+  await command.handler(options);
   resetDir();
 }
 
