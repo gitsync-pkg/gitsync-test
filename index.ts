@@ -9,6 +9,7 @@ import Repo from "./Repo";
 import stripAnsi from 'strip-ansi';
 
 let cwd: string;
+const rootDir = path.resolve();
 
 export function changeDir(repo: Git) {
   cwd = process.cwd();
@@ -24,7 +25,7 @@ export class RepoManager {
   private nameIndex: number = 1;
 
   constructor(baseDir: string = null) {
-    this.baseDir = path.resolve(baseDir || 'data' + Math.random());
+    this.baseDir = path.join(rootDir, baseDir || 'data' + Math.random());
   }
 
   createRepo = async (bare: boolean = false) => {
