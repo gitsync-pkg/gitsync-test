@@ -1,9 +1,6 @@
-import * as fs from 'fs';
-import {logMessage, clearMessage, RepoManager} from '..';
+import {logMessage, clearMessage, createRepo} from '..';
 import {Git} from "git-cli-wrapper";
 import * as npmlog from "npmlog";
-
-const {createRepo, removeRepos} = new RepoManager();
 
 describe('Gitsync test package', () => {
   test('createRepo', async () => {
@@ -14,16 +11,6 @@ describe('Gitsync test package', () => {
     expect(repo2).toBeInstanceOf(Git);
 
     expect(repo1).not.toEqual(repo2);
-
-    await removeRepos();
-  });
-
-  test('removeRepos', async () => {
-    const repo = await createRepo();
-    expect(fs.existsSync(repo.dir)).toBeTruthy();
-
-    await removeRepos();
-    expect(fs.existsSync(repo.dir)).toBeFalsy();
   });
 
   test('clearMessage', async () => {

@@ -1,15 +1,11 @@
-import * as path from "path";
-import * as util from "util";
-import * as fs from 'fs';
-import * as rimraf from "rimraf";
 import * as log from 'npmlog';
 import {CommandModule} from "yargs";
 import {Git} from "git-cli-wrapper";
 import Repo from "./Repo";
 import stripAnsi from 'strip-ansi';
+import * as tmp from 'tmp-promise'
 
 let cwd: string;
-const rootDir = path.resolve();
 
 export function changeDir(repo: Git) {
   cwd = process.cwd();
@@ -20,37 +16,18 @@ export function resetDir() {
   process.chdir(cwd);
 }
 
-export class RepoManager {
-  private readonly _baseDir: string;
-  private nameIndex: number = 1;
+export async function createRepo(bare: boolean = false) {
+  const dir = await tmp.dir();
+  const repo = new Repo(dir.path);
 
-  constructor(baseDir: string = null) {
-    this._baseDir = path.join(rootDir, baseDir || 'data' + Math.random());
+  let init = ['init'];
+  if (bare) {
+    init.push('--bare');
   }
 
-  get baseDir(): string {
-    return this._baseDir;
-  }
+  await repo.run(init);
 
-  createRepo = async (bare: boolean = false) => {
-    const repoDir = path.join(this.baseDir, (this.nameIndex++).toString());
-    await util.promisify(fs.mkdir)(repoDir, {recursive: true});
-
-    const repo = new Repo(repoDir);
-
-    let init = ['init'];
-    if (bare) {
-      init.push('--bare');
-    }
-
-    await repo.run(init);
-
-    return repo;
-  };
-
-  removeRepos = () => {
-    return util.promisify(rimraf)(this.baseDir);
-  }
+  return repo;
 }
 
 export async function runCommand(command: CommandModule, source: Repo, options: any = {}) {
@@ -89,6 +66,3 @@ export function catchErrorSync(fn: Function) {
   }
   return error;
 }
-
-// @deprecated
-export const {createRepo, removeRepos} = new RepoManager('data');
