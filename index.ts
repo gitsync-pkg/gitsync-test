@@ -21,11 +21,15 @@ export function resetDir() {
 }
 
 export class RepoManager {
-  private baseDir: string;
+  private readonly _baseDir: string;
   private nameIndex: number = 1;
 
   constructor(baseDir: string = null) {
-    this.baseDir = path.join(rootDir, baseDir || 'data' + Math.random());
+    this._baseDir = path.join(rootDir, baseDir || 'data' + Math.random());
+  }
+
+  get baseDir(): string {
+    return this._baseDir;
   }
 
   createRepo = async (bare: boolean = false) => {
