@@ -8,8 +8,6 @@ import {Git} from "git-cli-wrapper";
 import Repo from "./Repo";
 import stripAnsi from 'strip-ansi';
 
-const baseDir = path.resolve('data');
-let nameIndex = 1;
 let cwd: string;
 
 export function changeDir(repo: Git) {
@@ -21,24 +19,33 @@ export function resetDir() {
   process.chdir(cwd);
 }
 
-export async function createRepo(bare: boolean = false) {
-  const repoDir = path.join(baseDir, (nameIndex++).toString());
-  await util.promisify(fs.mkdir)(repoDir, {recursive: true});
+export class RepoManager {
+  private baseDir: string;
+  private nameIndex: number = 1;
 
-  const repo = new Repo(repoDir);
-
-  let init = ['init'];
-  if (bare) {
-    init.push('--bare');
+  constructor(baseDir: string = null) {
+    this.baseDir = path.resolve(baseDir || 'data' + Math.random());
   }
 
-  await repo.run(init);
+  createRepo = async (bare: boolean = false) => {
+    const repoDir = path.join(this.baseDir, (this.nameIndex++).toString());
+    await util.promisify(fs.mkdir)(repoDir, {recursive: true});
 
-  return repo;
-};
+    const repo = new Repo(repoDir);
 
-export function removeRepos() {
-  return util.promisify(rimraf)(baseDir);
+    let init = ['init'];
+    if (bare) {
+      init.push('--bare');
+    }
+
+    await repo.run(init);
+
+    return repo;
+  };
+
+  removeRepos = () => {
+    return util.promisify(rimraf)(this.baseDir);
+  }
 }
 
 export async function runCommand(command: CommandModule, source: Repo, options: any = {}) {
@@ -77,3 +84,6 @@ export function catchErrorSync(fn: Function) {
   }
   return error;
 }
+
+// @deprecated
+export const {createRepo, removeRepos} = new RepoManager('data');
