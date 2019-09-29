@@ -31,6 +31,7 @@ export async function createRepo(bare: boolean = false) {
 }
 
 export async function runCommand(command: CommandModule, source: Repo, options: any = {}) {
+  options.yes = true;
   changeDir(source);
   await command.handler(options);
   resetDir();
