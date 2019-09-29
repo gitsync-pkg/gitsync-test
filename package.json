@@ -27,13 +27,14 @@
     "@types/node": "^12.7.4",
     "@types/npmlog": "^4.1.2",
     "@types/rimraf": "^2.0.2",
+    "@types/tmp": "^0.1.0",
     "@types/yargs": "^13.0.2",
     "git-cli-wrapper": "^0.2.0",
     "npmlog": "^4.1.2",
     "rimraf": "^3.0.0",
     "strip-ansi": "^5.2.0",
-    "yargs": "^14.0.0",
-    "tmp-promise": "^2.0.2"
+    "tmp-promise": "^2.0.2",
+    "yargs": "^14.0.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.18",
