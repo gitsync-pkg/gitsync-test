@@ -7,6 +7,20 @@ import * as tmp from 'tmp-promise'
 
 let cwd: string;
 
+let hasIdentity: boolean = null;
+
+// Set global user for GitHub actions
+async function initIdentity() {
+  if (hasIdentity === null) {
+    const repo = new Repo('.');
+    hasIdentity = !!await repo.run(['config', 'user.email']);
+    if (!hasIdentity) {
+      await repo.run(['config', '--global', 'user.email', 'you@example.com']);
+      await repo.run(['config', '--global', 'user.name', 'Your Name']);
+    }
+  }
+}
+
 export function changeDir(repo: Git) {
   cwd = process.cwd();
   process.chdir(repo.dir);
@@ -17,6 +31,8 @@ export function resetDir() {
 }
 
 export async function createRepo(bare: boolean = false) {
+  await initIdentity();
+
   const dir = await tmp.dir();
   const repo = new Repo(dir.path);
 
