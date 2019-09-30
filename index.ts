@@ -13,7 +13,7 @@ let hasIdentity: boolean = null;
 async function initIdentity() {
   if (hasIdentity === null) {
     const repo = new Repo('.');
-    hasIdentity = !!await repo.run(['config', 'user.email']);
+    hasIdentity = !!await repo.run(['config', '--global', 'user.email']);
     if (!hasIdentity) {
       await repo.run(['config', '--global', 'user.email', 'you@example.com']);
       await repo.run(['config', '--global', 'user.name', 'Your Name']);
