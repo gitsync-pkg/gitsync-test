@@ -1,6 +1,6 @@
 {
   "name": "@gitsync/test",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Test utils for Gitsync",
   "keywords": [
     "gitsync",
@@ -29,7 +29,7 @@
     "@types/rimraf": "^2.0.2",
     "@types/tmp": "^0.1.0",
     "@types/yargs": "^13.0.2",
-    "git-cli-wrapper": "^0.3.0",
+    "git-cli-wrapper": "^0.3.1",
     "npmlog": "^4.1.2",
     "rimraf": "^3.0.0",
     "strip-ansi": "^5.2.0",
