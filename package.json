@@ -24,7 +24,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@types/node": "^12.7.4",
+    "@types/node": "^14.0.23",
     "@types/npmlog": "^4.1.2",
     "@types/rimraf": "^2.0.2",
     "@types/tmp": "^0.1.0",
