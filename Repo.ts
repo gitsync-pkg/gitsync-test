@@ -17,11 +17,13 @@ export default class Repo extends Git {
   }
 
   async commitFile(path: string, content: string = null, message: string = null) {
-    await this.addFile(path, content || path);
     if (!message) {
       const now = new Date();
-      message = (fs.existsSync(path) ? 'update' : 'add') + ' ' + path + ' ' + (now.getTime() / 1000);
+      message = (fs.existsSync(this.getFile(path)) ? 'update' : 'add') + ' ' + path + ' ' + (now.getTime() / 1000);
     }
+
+    await this.addFile(path, content || path);
+
     return await this.run(['commit', '-am', message])
   }
 

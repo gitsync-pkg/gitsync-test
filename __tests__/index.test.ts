@@ -30,4 +30,14 @@ describe('Gitsync test package', () => {
 
     expect(await repo.run(['log', '-n', '1'])).toContain('add test.txt');
   });
+
+  test('commitFile message', async () => {
+    const repo = await createRepo();
+
+    await repo.commitFile('test.txt', 'content1');
+    expect(await repo.run(['log', '-n', '1'])).toContain('add test.txt');
+
+    await repo.commitFile('test.txt', 'content2');
+    expect(await repo.run(['log', '-n', '1'])).toContain('update test.txt');
+  });
 });
